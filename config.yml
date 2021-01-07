@@ -1,0 +1,6 @@
+services:
+  - name: cpp
+    bin: clangd
+server:
+  port: 3001
+  type: websocket

@@ -1,0 +1,29 @@
+{
+  "name": "xonlinelsp",
+  "version": "0.0.1",
+  "description": "a lsp service to provide proxy websocket to lsp server",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "tsc&&node .",
+    "build": "tsc"
+  },
+  "keywords": [
+    "lsp"
+  ],
+  "author": "aserjoker@outlook.com",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/AserJoker/xonlinelsp.git"
+  },
+  "dependencies": {
+    "@sourcegraph/vscode-ws-jsonrpc": "0.0.3-fork",
+    "@types/js-yaml": "^4.0.0",
+    "@types/ws": "^7.4.0",
+    "js-yaml": "^4.0.0",
+    "typescript": "^4.1.3",
+    "ws": "^7.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.20"
+  }
+}
