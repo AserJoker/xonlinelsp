@@ -1,3 +1,4 @@
+#!/user/bin/env node
 import { Config } from "./config";
 import { WebSocketServer } from "./server";
 const argv = process.argv.splice(2);
