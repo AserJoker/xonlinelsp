@@ -9,11 +9,13 @@ export class Config {
   };
   public static LoadConfig(configfile?: string) {
     fs.access(
-      configfile || path.resolve(process.argv[1], "config.yml"),
+      (configfile && path.resolve(process.cwd(), configfile)) ||
+        path.resolve(process.argv[1], "config.yml"),
       (e) => {
         if (e && e.code === "ENOENT") {
           fs.writeFile(
-            path.resolve(process.argv[1], "config.yml"),
+            (configfile && path.resolve(process.cwd(), configfile)) ||
+              path.resolve(process.argv[1], "config.yml"),
             `
 services: []
 server:
