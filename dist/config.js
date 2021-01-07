@@ -39,10 +39,10 @@ var Config = /** @class */ (function () {
     }
     Config.LoadConfig = function (configfile) {
         fs.access((configfile && path.resolve(process.cwd(), configfile)) ||
-            path.resolve(process.argv[1], "config.yml"), function (e) {
+            path.resolve("~", "config.yml"), function (e) {
             if (e && e.code === "ENOENT") {
                 fs.writeFile((configfile && path.resolve(process.cwd(), configfile)) ||
-                    path.resolve(process.argv[1], "config.yml"), "\nservices: []\nserver:\n port: 3000\n type: websocket\n            ", function (e) {
+                    path.resolve("~", "config.yml"), "\nservices: []\nserver:\n port: 3000\n type: websocket\n            ", function (e) {
                     if (e)
                         console.log(e);
                 });
