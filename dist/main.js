@@ -1,4 +1,4 @@
-#!/user/bin/env node
+#!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var config_1 = require("./config");
