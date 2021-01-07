@@ -7,6 +7,9 @@
     "dev": "tsc&&node .",
     "build": "tsc"
   },
+  "bin":{
+    "xonlinelsp":"dist/main.js"
+  },
   "keywords": [
     "lsp"
   ],
