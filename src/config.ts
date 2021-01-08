@@ -7,32 +7,29 @@ export class Config {
     services: [],
     server: { port: 3000, type: "websocket" }
   };
+  private static path = path.resolve(process.cwd(), "config.yml");
   public static LoadConfig(configfile?: string) {
-    fs.access(
-      (configfile && path.resolve(process.cwd(), configfile)) ||
-        path.resolve("~", "config.yml"),
-      (e) => {
-        if (e && e.code === "ENOENT") {
-          fs.writeFile(
-            (configfile && path.resolve(process.cwd(), configfile)) ||
-              path.resolve("~", "config.yml"),
-            `
+    if (configfile) {
+      this.path = path.resolve(process.cwd(), configfile);
+    }
+    fs.access(this.path, (e) => {
+      if (e && e.code === "ENOENT") {
+        fs.writeFile(
+          this.path,
+          `
 services: []
 server:
  port: 3000
  type: websocket
             `,
-            (e) => {
-              if (e) console.log(e);
-            }
-          );
-        }
+          (e) => {
+            if (e) console.log(e);
+          }
+        );
       }
-    );
+    });
     this.config = {
-      ...(yaml2js.load(
-        fs.readFileSync(path.resolve(process.argv[1], "config.yml"), "utf-8")
-      ) as object)
+      ...(yaml2js.load(fs.readFileSync(this.path, "utf-8")) as object)
     } as IConfig;
   }
   public static getServerConfig() {

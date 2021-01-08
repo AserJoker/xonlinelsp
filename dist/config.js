@@ -38,17 +38,19 @@ var Config = /** @class */ (function () {
     function Config() {
     }
     Config.LoadConfig = function (configfile) {
-        fs.access((configfile && path.resolve(process.cwd(), configfile)) ||
-            path.resolve("~", "config.yml"), function (e) {
+        var _this = this;
+        if (configfile) {
+            this.path = path.resolve(process.cwd(), configfile);
+        }
+        fs.access(this.path, function (e) {
             if (e && e.code === "ENOENT") {
-                fs.writeFile((configfile && path.resolve(process.cwd(), configfile)) ||
-                    path.resolve("~", "config.yml"), "\nservices: []\nserver:\n port: 3000\n type: websocket\n            ", function (e) {
+                fs.writeFile(_this.path, "\nservices: []\nserver:\n port: 3000\n type: websocket\n            ", function (e) {
                     if (e)
                         console.log(e);
                 });
             }
         });
-        this.config = __assign({}, yaml2js.load(fs.readFileSync(path.resolve(process.argv[1], "config.yml"), "utf-8")));
+        this.config = __assign({}, yaml2js.load(fs.readFileSync(this.path, "utf-8")));
     };
     Config.getServerConfig = function () {
         return this.config.server;
@@ -60,6 +62,7 @@ var Config = /** @class */ (function () {
         services: [],
         server: { port: 3000, type: "websocket" }
     };
+    Config.path = path.resolve(process.cwd(), "config.yml");
     return Config;
 }());
 exports.Config = Config;
